@@ -1,0 +1,39 @@
+name: github pages
+on:
+  push:
+    branches: [master]
+# 执行的一项或多项任务
+jobs:
+  build-and-deploy:
+    # 运行在虚拟机环境ubuntu-latest
+    # https://docs.github.com/zh/actions/using-workflows/workflow-syntax-for-github-actions#jobsjob_idruns-on
+    runs-on: ubuntu-latest
+    steps:
+      - name: 获取源码 🛎️
+        uses: actions/checkout@v3
+      - name: Node环境版本 🗜️
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+      - name: Yarn缓存 📁
+        id: yarn-cache
+        run: echo "dir=$(yarn cache dir)" >> $GITHUB_OUTPUT
+      - name: 缓存依赖 📚
+        uses: actions/cache@v2
+        with:
+          path: ${{ steps.yarn-cache.outputs.dir }}
+          key: ${{ runner.os }}-yarn-${{ hashFiles('**/yarn.lock') }}
+          restore-keys: |
+            ${{ runner.os }}-yarn-
+      - name: 安装依赖 📦
+        run: yarn install --frozen-lockfile
+      - name: 生成PDF 📖
+        run: yarn pdf
+      - name: 打包 🏗️
+        run: npm run build && touch ./out/.nojekyll # run: touch ./out/.nojekyll是因为由于 Jekyll 处理,GitHub 默认不提供_next文件夹,.nojekyll文件阻止了这种情况,
+      - name: 部署 🚀
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages # 部署后提交到那个分支
+          folder: out # 这里填打包好的目录名称
+          clean: true

@@ -1,0 +1,5 @@
+#!/usr/bin/env sh
+echo "-----------git提交信息校验-----------"
+echo "ⓘ   提交规范: 遵循Conventional Commits规范。"
+echo "ⓘ   规范详情: https://juejin.cn/post/6985500205554597918"
+npx --no -- commitlint --edit ${1}
