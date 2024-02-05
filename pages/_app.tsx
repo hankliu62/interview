@@ -1,17 +1,10 @@
 import "./globals.css";
-
-import type { Metadata } from "next";
-
-export const metadata: Metadata = {
-  title: "HankLiu 面试题",
-  description: "HankLiu整理的前端面试题汇总网站",
-};
-
 import "nprogress/nprogress.css";
 // markdown-editor
 import "@uiw/react-md-editor/markdown-editor.css";
 import "@uiw/react-markdown-preview/markdown.css";
 
+import type { Metadata } from "next";
 import { NextPage } from "next";
 import type { AppProps } from "next/app";
 import Head from "next/head";
@@ -20,6 +13,11 @@ import NProgress from "nprogress";
 import { ReactElement, ReactNode, useEffect } from "react";
 
 import DefaultLayout from "@/layouts/index";
+
+export const metadata: Metadata = {
+  title: "HankLiu 面试题",
+  description: "HankLiu整理的前端面试题汇总网站",
+};
 
 
 type NextPageWithLayout = NextPage & {
