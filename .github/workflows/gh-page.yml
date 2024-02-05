@@ -30,7 +30,7 @@ jobs:
       - name: 生成PDF 📖
         run: yarn pdf
       - name: 打包 🏗️
-        run: npm run build && touch ./out/.nojekyll # run: touch ./out/.nojekyll是因为由于 Jekyll 处理,GitHub 默认不提供_next文件夹,.nojekyll文件阻止了这种情况,
+        run: npm run build # && touch ./out/.nojekyll # run: touch ./out/.nojekyll是因为由于 Jekyll 处理,GitHub 默认不提供_next文件夹,.nojekyll文件阻止了这种情况,
       - name: 部署 🚀
         uses: JamesIves/github-pages-deploy-action@v4
         with:

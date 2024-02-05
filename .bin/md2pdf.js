@@ -17,7 +17,7 @@ fs.readdir( md_dir, function( err, files ) {
   files.forEach( function( file, index ) {
     // Make one pass and make the file complete
     var md_path = path.join( md_dir, file );
-    var pdf_path = path.join( pdf_dir, file + '.pdf' );
+    var pdf_path = path.join( pdf_dir, file.replace('.md', '.pdf') );
 
     fs.stat( md_path, function( error, stat ) {
       if( error ) {
