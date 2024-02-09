@@ -12115,7 +12115,7 @@ export default new Router({
 }
 ```
 
-## 谈一谈 nextTick 的原理
+## 谈一谈 Vue.$nextTick 的原理
 
 - 在下次 DOM 更新循环结束之后执行延迟回调。
 
@@ -12141,7 +12141,7 @@ export default new Router({
   - 父beforeDestroy->子beforeDestroy->子destroyed->父destroyed
 
 
-## 实现通信方式
+## Vue实现通信方式
 
 ### 方式1: props
 1. 通过一般属性实现父向子通信
@@ -12257,7 +12257,7 @@ export function initUse (Vue: GlobalAPI) {
 
 3. 总结：new Vue()创建了根实例并准备好数据和方法，未来执行挂载时，此过程还会递归的应用于它的子组件上，最终形成一个有紧密关系的组件实例树。
 
-## 请说一下响应式数据的理解？
+## 请说一下Vue响应式数据的理解？
 
 根据数据类型来做不同处理，数组和对象类型当值变化时如何劫持。
 
@@ -12372,7 +12372,7 @@ Vue3.x借鉴了 ivi算法和 inferno算法
 
 在创建VNode时就确定其类型，以及在mount/patch的过程中采用位运算来判断一个VNode的类型，在这个基础之上再配合核心的Diff算法，使得性能上较Vue2.x有了提升。(实际的实现可以结合Vue3.x源码看。)
 
-## SSR了解吗？
+## Vue SSR了解吗？
 
 - SSR也就是服务端渲染，也就是将Vue在客户端把标签渲染成HTML的工作放在服务端完成，然后再把html直接返回给客户端。
 
@@ -17371,7 +17371,7 @@ function test2(num){
 * 进程在执行过程中拥有独立的内存单元，而多个线程共享内存
 * 线程不能够独立执行，必须应用程序提供多个线程执行控制
 
-## 其他
+## 前端工程化的理解
 
 **如何评价AngularJS和BackboneJS**
 
@@ -18850,7 +18850,7 @@ class HttpClient {
 
 3. 在子页面中调用封装的方法请求数据
 
-## 有哪些参数传值的方法？
+## 小程序有哪些参数传值的方法？
 
 1. 给HTML元素添加data-*属性来传递我们需要的值，然后通过e. currentTarget. dataset或onload的param参数获取。但data-名称不能有大写字母和不可以存放对象
 
@@ -18979,7 +18979,7 @@ wx.miniProgram.navigateTo({
 
 使用wx. getUserInfo方法withCredentials为 true 时 可获取encryptedData，里面有 union_id。后端需要进行对称解密
 
-## 如何实现下拉刷新？
+## 小程序如何实现下拉刷新？
 
 用view代替scroll-view, , 设置onPullDownRefresh函数实现
 
@@ -19843,26 +19843,30 @@ contenthash表示由文件内容产生的hash值，内容不同产生的contenth
 - `select` 字段将 `value` 作为 property 并将 `change` 作为事件。
 
 ``` vue
-<input v-model="msg">
+<input v-model="msg" />
 
 // 相当于
 
-<input v-bind:value="msg" @input="msg=$event.target.value">
+<input v-bind:value="msg" @input="msg=$event.target.value" />
 ```
 
-## vm.$isServer
+## vm.$isServer, vm.$attrs 和 vm.$listeners 含义
+
+### vm.$isServer
 
 当前 Vue 实例是否运行于服务器。
 
-## vm.$attrs
+### vm.$attrs
 
 包含了父作用域中不作为 prop 被识别 (且获取) 的 attribute 绑定 (class 和 style 除外)。当一个组件没有声明任何 prop 时，这里会包含所有父作用域的绑定 (class 和 style 除外)，并且可以通过 v-bind="$attrs" 传入内部组件——在创建高级别的组件时非常有用。
 
-## vm.$listeners
+### vm.$listeners
 
 包含了父作用域中的 (不含 .native 修饰器的) v-on 事件监听器。它可以通过 v-on="$listeners" 传入内部组件——在创建更高层次的组件时非常有用。
 
-## WeakSet
+## WeakSet 和 WeakMap
+
+### WeakSet
 
 对象是一些对象值的集合, 并且其中的每个对象值都只能出现一次。在WeakSet的集合中是唯一的
 
@@ -19871,7 +19875,7 @@ contenthash表示由文件内容产生的hash值，内容不同产生的contenth
 - 与Set相比，WeakSet 只能是对象的集合，而不能是任何类型的任意值。
 - WeakSet持弱引用：集合中对象的引用为弱引用。 如果没有其他的对WeakSet中对象的引用，那么这些对象会被当成垃圾回收掉。 这也意味着WeakSet中没有存储当前对象的列表。 正因为这样，WeakSet 是不可枚举的。
 
-## WeakMap
+### WeakMap
 
 对象是一组键/值对的集合，其中的键是弱引用的。其键必须是对象，而值可以是任意的。
 
@@ -19880,7 +19884,6 @@ contenthash表示由文件内容产生的hash值，内容不同产生的contenth
 - 原生的 WeakMap 持有的是每个键对象的“弱引用”，这意味着在没有其他引用存在时垃圾回收能正确进行。原生 WeakMap 的结构是特殊且有效的，其用于映射的 key 只有在其没有被回收时才是有效的。
 
 - WeakMap 的 key 是不可枚举的 (没有方法能给出所有的 key)。如果key 是可枚举的话，其列表将会受垃圾回收机制的影响，从而得到不确定的结果。因此，如果你想要这种类型对象的 key 值的列表，你应该使用 Map。
-
 
 ## react-router
 
@@ -19964,7 +19967,7 @@ history.go(-1);
 history.goBack();
 ```
 
-## 其它
+### 其它
 
 1. 使用basename
 
@@ -21160,3 +21163,111 @@ Transport Layer Security (TLS) 是一个为计算机网络提供通信安全的�
 WeakRef是一个更高级的API，它提供了真正的弱引用。
 
 WeakRef 和 FinalizationRegistry 属于高级Api，在Chrome v84 和 Node.js 13.0.0 后开始支持。一般情况下不建议使用。
+
+
+## post为什么会发送两次请求？
+
+### 同源策略
+
+在浏览器中，内容是很开放的，任何资源都可以接入其中，如 JavaScript 文件、图片、音频、视频等资源，甚至可以下载其他站点的可执行文件。
+但也不是说浏览器就是完全自由的，如果不加以控制，就会出现一些不可控的局面，例如会出现一些安全问题，如：
+
+  - 跨站脚本攻击（XSS）
+  - SQL 注入攻击
+  - OS 命令注入攻击
+  - HTTP 首部注入攻击
+  - 跨站点请求伪造（CSRF）
+  - 等等......
+
+如果这些都没有限制的话，对于我们用户而言，是相对危险的，因此需要一些安全策略来保障我们的隐私和数据安全。
+这就引出了最基础、最核心的安全策略：同源策略。
+
+#### 什么是同源策略
+同源策略是一个重要的安全策略，它用于限制一个源的文档或者它加载的脚本如何能与另一个源的资源进行交互。
+如果两个 URL 的协议、主机和端口都相同，我们就称这两个 URL 同源。
+
+- 协议：协议是定义了数据如何在计算机内和之间进行交换的规则的系统，例如 HTTP、HTTPS。
+- 主机：是已连接到一个计算机网络的一台电子计算机或其他设备。网络主机可以向网络上的用户或其他节点提供信息资源、服务和应用。使用 TCP/IP 协议族参与网络的计算机也可称为 IP 主机。
+- 端口：主机是计算机到计算机之间的通信，那么端口就是进程到进程之间的通信。
+
+如下表给出了与 URL `http://store.company.com:80/dir/page.html` 的源进行对比的示例：
+
+| URL | 结果 | 原因 |
+|:----|:----|:----|
+| http://store.company.com:80/dir2/page.html | 同源只 | 有路径不同 |
+| http://store.company.com:80/dir/inner/another.html | 同源 | 只有路径不同 |
+| https://store.company.com:443/secure.html | 不同源 | 协议不同，HTTP 和 HTTPS |
+| http://store.company.com:81/dir/etc.html | 不同源 | 端口不同 |
+| http://news.company.com:80/dir/other.html| 不同源 | 主机不同 |
+
+同源策略主要表现在以下三个方面：DOM、Web 数据和网络。
+
+- DOM 访问限制：同源策略限制了网页脚本（如 JavaScript）访问其他源的 DOM。这意味着通过脚本无法直接访问跨源页面的 DOM 元素、属性或方法。这是为了防止恶意网站从其他网站窃取敏感信息。
+- Web 数据限制：同源策略也限制了从其他源加载的 Web 数据（例如 XMLHttpRequest 或 Fetch API）。在同源策略下，XMLHttpRequest 或 Fetch 请求只能发送到与当前网页具有相同源的目标。这有助于防止跨站点请求伪造（CSRF）等攻击。
+- 网络通信限制：同源策略还限制了跨源的网络通信。浏览器会阻止从一个源发出的请求获取来自其他源的响应。这样做是为了确保只有受信任的源能够与服务器进行通信，以避免恶意行为。
+
+出于安全原因，浏览器限制从脚本内发起的跨源 HTTP 请求，XMLHttpRequest 和 Fetch API，只能从加载应用程序的同一个域请求 HTTP 资源，除非使用 CORS 头文件
+
+### CORS
+对于浏览器限制这个词，要着重解释一下：不一定是浏览器限制了发起跨站请求，也可能是跨站请求可以正常发起，但是返回结果被浏览器拦截了。
+浏览器将不同域的内容隔离在不同的进程中，网络进程负责下载资源并将其送到渲染进程中，但由于跨域限制，某些资源可能被阻止加载到渲染进程。如果浏览器发现一个跨域响应包含了敏感数据，它可能会阻止脚本访问这些数据，即使网络进程已经获得了这些数据。CORB 的目标是在渲染之前尽早阻止恶意代码获取跨域数据。
+
+> CORB 是一种安全机制，用于防止跨域请求恶意访问跨域响应的数据。渲染进程会在 CORB 机制的约束下，选择性地将哪些资源送入渲染进程供页面使用。
+
+例如，一个网页可能通过 AJAX 请求从另一个域的服务器获取数据。虽然某些情况下这样的请求可能会成功，但如果浏览器检测到请求返回的数据可能包含恶意代码或与同源策略冲突，浏览器可能会阻止网页访问返回的数据，以确保用户的安全。
+
+跨源资源共享（Cross-Origin Resource Sharing，CORS）是一种机制，允许在受控的条件下，不同源的网页能够请求和共享资源。由于浏览器的同源策略限制了跨域请求，CORS 提供了一种方式来解决在 Web 应用中进行跨域数据交换的问题。
+
+CORS 的基本思想是，服务器在响应中提供一个标头（HTTP 头），指示哪些源被允许访问资源。浏览器在发起跨域请求时会先发送一个预检请求（OPTIONS 请求）到服务器，服务器通过设置适当的 CORS 标头来指定是否允许跨域请求，并指定允许的请求源、方法、标头等信息。
+
+#### 简单请求
+
+不会触发 CORS 预检请求。这样的请求为 `简单请求`，。若请求满足所有下述条件，则该请求可视为 `简单请求`：
+
+1. HTTP 方法限制：只能使用 GET、HEAD、POST 这三种 HTTP 方法之一。如果请求使用了其他 HTTP 方法，就不再被视为简单请求。
+2. 自定义标头限制：请求的 HTTP 标头只能是以下几种常见的标头：`Accept`、`Accept-Language`、`Content-Language`、`Last-Event-ID`、`Content-Type`（仅限于 `application/x-www-form-urlencoded`、`multipart/form-data`、`text/plain`）。HTML 头部 header field 字段：DPR、Download、Save-Data、Viewport-Width、WIdth。如果请求使用了其他标头，同样不再被视为简单请求。
+3. 请求中没有使用 ReadableStream 对象。
+4. 不使用自定义请求标头：请求不能包含用户自定义的标头。
+5. 请求中的任意 XMLHttpRequestUpload 对象均没有注册任何事件监听器；XMLHttpRequestUpload 对象可以使用 XMLHttpRequest.upload 属性访问
+
+#### 预检请求
+
+非简单请求的 CORS 请求，会在正式通信之前，增加一次 HTTP 查询请求，称为 `预检请求`。
+
+需预检的请求要求必须首先使用 OPTIONS 方法发起一个预检请求到服务器，以获知服务器是否允许该实际请求。`预检请求` 的使用，可以避免跨域请求对服务器的用户数据产生未预期的影响。
+
+例如我们在掘金上删除一条沸点:
+
+![image](https://github.com/hankliu62/hankliu62.github.com/assets/8088864/b7680da4-80ac-4f3a-9cfd-129d379a5a6c)
+
+它首先会发起一个预检请求,预检请求的头信息包括两个特殊字段：
+
+- Access-Control-Request-Method：该字段是必须的，用来列出浏览器的 CORS 请求会用到哪些 HTTP 方法，上例是 POST。
+- Access-Control-Request-Headers：该字段是一个逗号分隔的字符串，指定浏览器 CORS 请求会额外发送的头信息字段，上例是 `content-type`,`x-secsdk-csrf-token`。
+- Access-Control-Allow-Origin：在上述例子中，表示 `https://juejin.cn` 可以请求数据，也可以设置为* 符号，表示统一任意跨源请求。
+- Access-Control-Max-Age：该字段可选，用来指定本次预检请求的有效期，单位为秒。上面结果中，有效期是 1 天（86408 秒），即允许缓存该条回应 1 天（86408 秒），在此期间，不用发出另一条预检请求。
+
+一旦服务器通过了 `预检请求`，以后每次浏览器正常的 CORS 请求，就都跟简单请求一样，会有一个 Origin 头信息字段。服务器的回应，也都会有一个 Access-Control-Allow-Origin 头信息字段。
+
+![image](https://github.com/hankliu62/hankliu62.github.com/assets/8088864/22605138-f8a1-4616-935f-5e6cd8bf9817)
+
+上面头信息中，Access-Control-Allow-Origin 字段是每次回应都必定包含的。
+
+#### 附带身份凭证的请求与通配符
+
+在响应附带身份凭证的请求时：
+
+- 为了避免恶意网站滥用 Access-Control-Allow-Origin 头部字段来获取用户敏感信息，服务器在设置时不能将其值设为通配符 *。相反，应该将其设置为特定的域，例如：Access-Control-Allow-Origin: `https://juejin.cn`。通过将 Access-Control-Allow-Origin 设置为特定的域，服务器只允许来自指定域的请求进行跨域访问。这样可以限制跨域请求的范围，避免不可信的域获取到用户敏感信息。
+- 为了避免潜在的安全风险，服务器不能将 Access-Control-Allow-Headers 的值设为通配符 `*`。这是因为不受限制的请求头可能被滥用。相反，应该将其设置为一个包含标头名称的列表，例如：Access-Control-Allow-Headers: X-PINGOTHER, Content-Type。通过将 Access-Control-Allow-Headers 设置为明确的标头名称列表，服务器可以限制哪些自定义请求头是允许的。只有在允许的标头列表中的头部字段才能在跨域请求中被接受。
+- 为了避免潜在的安全风险，服务器不能将 Access-Control-Allow-Methods 的值设为通配符 `*`。这样做将允许来自任意域的请求使用任意的 HTTP 方法，可能导致滥用行为的发生。相反，应该将其设置为一个特定的请求方法名称列表，例如：Access-Control-Allow-Methods: POST, GET。通过将 Access-Control-Allow-Methods 设置为明确的请求方法列表，服务器可以限制哪些方法是允许的。只有在允许的方法列表中的方法才能在跨域请求中被接受和处理。
+- 对于附带身份凭证的请求（通常是 Cookie），
+
+这是因为请求的标头中携带了 Cookie 信息，如果 Access-Control-Allow-Origin 的值为 `*`，请求将会失败。而将 Access-Control-Allow-Origin 的值设置为 `https://juejin.cn`，则请求将成功执行。
+
+另外，响应标头中也携带了 Set-Cookie 字段，尝试对 Cookie 进行修改。如果操作失败，将会抛出异常。
+
+### 为什么本地使用 webpack 进行 dev 开发时，不需要服务器端配置 cors 的情况下访问到线上接口？
+
+当你在本地通过 Ajax 或其他方式请求线上接口时，由于浏览器的同源策略，会出现跨域的问题。但是在服务器端并不会出现这个问题。
+
+它是通过 Webpack Dev Server 来实现这个功能。当你在浏览器中发送请求时，请求会先被 Webpack Dev Server 捕获，然后根据你的代理规则将请求转发到目标服务器，目标服务器返回的数据再经由 Webpack Dev Server 转发回浏览器。这样就绕过了浏览器的同源策略限制，使你能够在本地开发环境中访问线上接口。
