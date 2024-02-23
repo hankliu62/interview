@@ -17,7 +17,7 @@ const { GithubRepoInterview, GithubRepoBlog } = require('./constant');
  * @param {*} label
  */
 async function generateBlogByLabel(label, titleMap) {
-  const mdDir = path.join(process.cwd(), 'markdown', 'interview');
+  const mdDir = path.join(process.cwd(), 'markdown');
   const issues = await fetchAllIssues(GithubRepoInterview, { labels: label.name });
   const title = `${label.description}的面试题`
 
