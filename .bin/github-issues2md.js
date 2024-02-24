@@ -1,6 +1,7 @@
 const fs = require('fs');
 const path = require('path');
-const { fetchAllIssues } = require('./issues');
+const { fetchAllIssues } = require('./libs/issues');
+const { GithubRepoBlog } = require('./constant');
 
 const mdDir = path.join(process.cwd(), 'markdown');
 
@@ -26,7 +27,7 @@ const Orders = {
  * 生产MD文件
  */
 const generateMd = async () => {
-  const issues = await fetchAllIssues();
+  const issues = await fetchAllIssues(GithubRepoBlog);
 
   const questions = [];
 
@@ -35,6 +36,7 @@ const generateMd = async () => {
     const nextLabel = (next.labels.filter((item) => item.name !== 'interview questions')[0] || {}).name || 'all';
     return Orders[preLabel] - Orders[nextLabel]
   })
+
   for (const item of sortedIssues) {
     questions.push([`## ${item.title}`, (item.body||'').trim()].filter(Boolean).join('\r\n\r\n'));
     // questions.push([`## ${item.title}`].filter(Boolean).join('\r\n\r\n'))
