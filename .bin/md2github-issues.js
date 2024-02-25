@@ -2,10 +2,12 @@ const fs = require('fs');
 const path = require('path');
 const readline = require('readline');
 
-const { createIssue, getIssuesTitleSet, getLabelsNameSet } = require('./issues');
+const { createIssue, getIssuesTitleSet } = require('./libs/issues');
+const { getLabelsNameSet } = require('./libs/labels');
+const { GithubRepoBlog, GithubRepoInterview } = require('./constant');
 
 async function run() {
-  const mdDir = path.join(process.cwd(), 'markdown');
+  const mdDir = path.join(process.cwd(), 'docs');
 
   const arguments = process.argv.splice(2);
 
@@ -15,10 +17,10 @@ async function run() {
   // 源文件名
   let mdFile = path.join(mdDir, 'interview-mini.md');
   if (type) {
-    const labelSet = await getLabelsNameSet();
+    const labelSet = await getLabelsNameSet(GithubRepoInterview);
     if (labelSet.has(type)) {
       mdFile = path.join(mdDir, `interview-${type}.md`);
-      apiOptions = { labels: ['interview questions', type].filter(Boolean) }
+      apiOptions = { labels: [type].filter(Boolean) }
     } else {
       label = undefined;
     }
@@ -57,7 +59,7 @@ async function run() {
     console.log('文件读取完毕');
     // console.log(questions);
 
-    const titleSet = getIssuesTitleSet(apiOptions);
+    const titleSet = await getIssuesTitleSet(GithubRepoInterview, apiOptions);
 
     if (questions.length) {
       let index = 0;
@@ -66,13 +68,14 @@ async function run() {
           return;
         }
 
-        if ((await titleSet).has(questions[index].title)) {
+        if (titleSet.has(questions[index].title)) {
           index ++;
           loopCreateIssue();
           return;
         }
 
         const res = await createIssue(
+          GithubRepoInterview,
           questions[index].title,
           (questions[index].answer || '').trim(),
           apiOptions,
