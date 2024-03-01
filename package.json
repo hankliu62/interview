@@ -12,6 +12,7 @@
     "pdf": "node .bin/md2pdf"
   },
   "dependencies": {
+    "@uiw/react-markdown-preview": "^5.0.7",
     "@uiw/react-md-editor": "^4.0.3",
     "dayjs": "^1.11.10",
     "markdown-pdf": "^11.0.0",
