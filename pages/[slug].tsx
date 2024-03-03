@@ -4,14 +4,13 @@ import { join } from "node:path";
 
 import matter from "gray-matter";
 import { InferGetStaticPropsType } from "next";
-import dynamic from "next/dynamic";
 import ErrorPage from "next/error";
 import { useRouter } from "next/router";
 import { remark } from 'remark';
 import html from 'remark-html';
 import type { VFileCompatible } from "vfile";
 
-const MDEditor = dynamic(() => import("@uiw/react-md-editor"), { ssr: false });
+import MarkdownPreview from "@/components/MarkdownPreview";
 
 export type Post = {
   slug?: string;
@@ -80,12 +79,9 @@ export default function PostPage({
           </header>
 
           <div>
-            <MDEditor
-              value={post.content}
-              visibleDragbar={false}
-              fullscreen
-              hideToolbar
-              preview="preview"
+            <MarkdownPreview
+              source={post.content}
+              showLoading
             />
           </div>
         </article>
