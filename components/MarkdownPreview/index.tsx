@@ -1,4 +1,4 @@
-import { MarkdownPreviewProps } from "@uiw/react-markdown-preview/lib/Props";
+import { MarkdownPreviewProps } from "@uiw/react-markdown-preview";
 import dynamic from "next/dynamic";
 import { useLayoutEffect, useRef, useState } from "react";
 
