@@ -19,6 +19,7 @@
 }
 
 body {
+  padding: 0 26px;
   color: rgb(var(--foreground-rgb));
   background: linear-gradient(
       to bottom,
@@ -32,6 +33,26 @@ body {
   .text-balance {
     text-wrap: balance;
   }
+}
+
+.markdown-preview .wmde-markdown ol {
+  list-style-type: decimal;
+}
+
+.markdown-preview .wmde-markdown ul ol {
+  list-style-type: decimal;
+}
+
+.markdown-preview .wmde-markdown ul {
+  list-style-type: initial;
+}
+
+.markdown-preview .wmde-markdown {
+  font-size: 16px;
+}
+
+.preview-container .markdown-preview .wmde-markdown {
+  font-size: 13px;
 }
 
 .skeleton {
@@ -49,19 +70,9 @@ body {
 
 .skeleton .skeleton-content .skeleton-title {
   width: 38%;
-  height: 16px;
+  height: 20px;
   background: rgba(0, 0, 0, 0.06);
   border-radius: 4px;
-}
-
-.skeleton.skeleton-active .skeleton-title,
-.skeleton.skeleton-active .skeleton-paragraph>li {
-  background: linear-gradient(90deg, rgba(0, 0, 0, 0.06) 25%, rgba(0, 0, 0, 0.15) 37%, rgba(0, 0, 0, 0.06) 63%);
-  background-size: 400% 100%;
-  animation-name: skeleton-loading;
-  animation-duration: 1.4s;
-  animation-timing-function: ease;
-  animation-iteration-count: infinite;
 }
 
 .skeleton .skeleton-content .skeleton-title + .skeleton-paragraph {
@@ -69,13 +80,30 @@ body {
   margin-block-start: 24px;
 }
 
-
 .skeleton .skeleton-content .skeleton-paragraph > li {
   width: 100%;
-  height: 16px;
+  height: 20px;
   list-style: none;
   background: rgba(0, 0, 0, 0.06);
   border-radius: 4px;
+}
+
+.skeleton .skeleton-content .skeleton-paragraph > li + li {
+  margin-top: 24px;
+}
+
+.skeleton .skeleton-content .skeleton-paragraph > li:nth-child(4n) {
+  width: 68%;
+}
+
+.skeleton.skeleton-active .skeleton-title,
+.skeleton.skeleton-active .skeleton-content .skeleton-paragraph > li {
+  background: linear-gradient(90deg, rgba(0, 0, 0, 0.06) 25%, rgba(0, 0, 0, 0.15) 37%, rgba(0, 0, 0, 0.06) 63%);
+  background-size: 400% 100%;
+  animation-name: skeleton-loading;
+  animation-duration: 1.4s;
+  animation-timing-function: ease;
+  animation-iteration-count: infinite;
 }
 
 @keyframes skeleton-loading {

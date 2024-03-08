@@ -66,12 +66,14 @@ export default function PostPage({
 }: InferGetStaticPropsType<typeof getStaticProps>) {
   const router = useRouter();
 
+  const preview = router.query?.preview;
+
   if (!router.isFallback && !post?.slug) {
     return <ErrorPage statusCode={404} />;
   }
 
   return (
-    <div className="bg-white p-6">
+    <div className={`bg-white p-6 ${preview ? 'preview-container' : ''}`}>
       <div className="flex flex-col space-y-6">
         <article>
           <header>

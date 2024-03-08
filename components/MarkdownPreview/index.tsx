@@ -15,7 +15,7 @@ export interface SkeletonParagraphProps {
 
 const Paragraph = (props: SkeletonParagraphProps) => {
   const getWidth = (index: number) => {
-    const { width, rows = 2 } = props;
+    const { width, rows = 4 } = props;
     if (Array.isArray(width)) {
       return width[index];
     }
@@ -26,7 +26,7 @@ const Paragraph = (props: SkeletonParagraphProps) => {
     return undefined;
   };
 
-  const { className, style, rows } = props;
+  const { className, style, rows = 4 } = props;
   // eslint-disable-next-line unicorn/no-useless-spread, unicorn/no-new-array
   const rowList = [...new Array(rows)].map((_, index) => (
     // eslint-disable-next-line react/no-array-index-key
@@ -47,7 +47,7 @@ const Skeleton = ({ active }: SkeletonProps) => (
   <div className={`skeleton ${active ? 'skeleton-active' : ''}`}>
     <div className="skeleton-content">
       <h3 className="skeleton-title" aria-hidden></h3>
-      <Paragraph className="skeleton-paragraph" />
+      <Paragraph className="skeleton-paragraph" rows={8} />
     </div>
   </div>
 )
@@ -90,7 +90,7 @@ export default function MarkdownPreview({
   }, [onLoad]);
 
   return (
-    <div ref={rootElement}>
+    <div className="markdown-preview" ref={rootElement}>
       <MDPreview {...otherProps} />
       {showLoading && loadingMarkdownPreview && <Skeleton active />}
     </div>
